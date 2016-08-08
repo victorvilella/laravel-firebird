@@ -153,4 +153,12 @@ class Connection extends \Illuminate\Database\Connection {
 
     return $query->from($table);
   }
+  
+  public function storedProcedure($table, $params = [])
+  {
+    $processor    = $this->getPostProcessor();
+    $query    = new Query\Builder($this, $this->getQueryGrammar(), $processor);
+      
+    return $query->fromSP($table, $params);
+  }
 }
